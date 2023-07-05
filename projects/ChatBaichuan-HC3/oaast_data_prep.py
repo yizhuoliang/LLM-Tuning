@@ -38,8 +38,11 @@ def transform_dataset(input_file, output_file):
     print(len(output_data))
 
     # Open the output file and write the output data to it
+    # 'ensure_ascii=False' makes the json.dump not escape non-ASCII characters
     with open(output_file, 'w', encoding='utf-8') as outfile:
-        json.dump(output_data, outfile, ensure_ascii=False, indent=2)
+        for entry in output_data:
+            json_str = json.dumps(entry, ensure_ascii=False)
+            outfile.write(json_str + "\n")
 
 # Invoke the function with the names of the input and output files
 transform_dataset('oaast_sft_zh.json', 'output.json')
