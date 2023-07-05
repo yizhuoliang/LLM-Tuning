@@ -38,7 +38,7 @@ def read_jsonl(path, max_seq_length, prompt_key,target_key,skip_overlength=False
         model_checkpoint, trust_remote_code=True, device_map='auto')
     with open(path, "r") as f:
         for line in tqdm(f.readlines()):
-            print(line)
+            print("the line: " + line + "\n")
             example = json.loads(line)
             print("--\n")
             feature = preprocess(tokenizer, config, example, max_seq_length,prompt_key,target_key)
